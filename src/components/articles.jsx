@@ -1,9 +1,11 @@
 import '../App.css';
 import { useEffect, useState } from "react"
 import ArticleItem from "./articleitem";
+import Searchbar from './searchbar';
 
 const ArticleList = () => {
     const [articles, setArticles] = useState([]);
+    const [topic, setTopic] = useState(["cooking"])
 
     let output = ""
 
@@ -11,30 +13,32 @@ const ArticleList = () => {
 
     useEffect(() => {
          setLoading = true
-         return fetch(`https://nc-news-dr.herokuapp.com/api/articles`).then((response) => {
-         let articles = response.json().then((articles)=>{
-            setArticles(articles)
-
+         return fetch(`https://nc-news-example-5.herokuapp.com/api/articles?topic=${topic}`).then((data) => {
+         return data.json()})
+         .then((data)=>{
+             setArticles(data.articles)
          })
+        
          setLoading = false
-        })
-    }, [])
+        }, [topic] )
 
     if (setLoading) return <h1>Loading....</h1>
 
 
     return (
-        <ul className ="articleBrowse" >
+
+        <div>
+            <Searchbar setTopic={setTopic}/>
+            <ul className ="articleBrowse" >
             {articles.map((article)=> {
                 return <li 
                 key={article.article_id}
                 > 
                 {< ArticleItem object={article}/>} </li>
-
+                
             })}
-            
-            </ul>
-    )
+        </ul>   
+</div> )
 }
 
 export default ArticleList
