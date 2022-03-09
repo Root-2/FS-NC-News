@@ -15,18 +15,18 @@ const ArticleList = () => {
 
     useEffect(() => { 
          setLoading(true)
-            return fetchAPI(`articles${query}`).then((data) => {
+            return fetchAPI(`articles/${query}`).then((data) => {
                 setLoading(false)         
                 setArticles(data.articles)     
             })
-        }, [topic, ] )
+        }, [query] )
 
     if (loading) { return <h1>Loading....</h1> }
     else {
     return (
 
         <div>
-            <Searchbar setTopic={setTopic}/>
+            <Searchbar setQuery={setQuery}/>
             <ul className ="articleBrowse" >
             {articles.map((article)=> {
                 return <li 
