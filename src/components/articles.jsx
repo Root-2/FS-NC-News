@@ -5,13 +5,11 @@ import ArticleItem from "./articleitem";
 const ArticleList = () => {
     const [articles, setArticles] = useState([]);
 
-    let output = ""
-
     let setLoading = false
 
     useEffect(() => {
          setLoading = true
-         return fetch(`https://nc-news-dr.herokuapp.com/api/articles`).then((response) => {
+         return fetch(`https://nc-news-example-5.herokuapp.com/api/articles`).then((response) => {
          let articles = response.json().then((articles)=>{
             setArticles(articles)
 
