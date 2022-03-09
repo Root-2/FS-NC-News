@@ -1,38 +1,43 @@
 import '../App.css';
 import { useEffect, useState } from "react"
 import ArticleItem from "./articleitem";
+import Searchbar from './searchbar';
+import {useLocation, useParams} from 'react-router-dom'
+import {fetchAPI} from '../api';
 
 const ArticleList = () => {
+    const location = (useLocation())
+    const params = useLocation()
     const [articles, setArticles] = useState([]);
+    const [topic, setTopic] =useState()
+    const [query, setQuery] = useState(location.search)
+    const [loading, setLoading] = useState(true)
 
-    let setLoading = false
+    useEffect(() => { 
+         setLoading(true)
+            return fetchAPI(`articles/${query}`).then((data) => {
+                setLoading(false)         
+                setArticles(data.articles)     
+            })
+        }, [query] )
 
-    useEffect(() => {
-         setLoading = true
-         return fetch(`https://nc-news-example-5.herokuapp.com/api/articles`).then((response) => {
-         let articles = response.json().then((articles)=>{
-            setArticles(articles)
-
-         })
-         setLoading = false
-        })
-    }, [])
-
-    if (setLoading) return <h1>Loading....</h1>
-
-
+    if (loading) { return <h1>Loading....</h1> }
+    else {
     return (
-        <ul className ="articleBrowse" >
+
+        <div>
+            <Searchbar setQuery={setQuery}/>
+            <ul className ="articleBrowse" >
             {articles.map((article)=> {
                 return <li 
                 key={article.article_id}
                 > 
                 {< ArticleItem object={article}/>} </li>
-
+                
             })}
-            
-            </ul>
-    )
+        </ul>   
+</div> )
+    }
 }
 
 export default ArticleList
