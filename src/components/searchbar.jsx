@@ -6,6 +6,7 @@ const Searchbar = ({setTopic}) => {
     <div>
         <label htmlFor="searchbar">Search (WIP):</label>
        {/* <input id="searchbar" onChange={(e) => setSearch(e.target.value)} type="text"></input> */}
+       {/* // Refactor to use Navigate */}
        <select id="topicselect" onChange={(e) => setTopic(e.target.value)}>
        {/* <option value="Any">Any</option> */}
            <option value="Coding">Coding</option>

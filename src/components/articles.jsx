@@ -2,29 +2,27 @@ import '../App.css';
 import { useEffect, useState } from "react"
 import ArticleItem from "./articleitem";
 import Searchbar from './searchbar';
+import {useLocation, useParams} from 'react-router-dom'
+import {fetchAPI} from '../api';
 
 const ArticleList = () => {
+    const location = (useLocation())
+    const params = useLocation()
     const [articles, setArticles] = useState([]);
-    const [topic, setTopic] = useState(["cooking"])
+    const [topic, setTopic] =useState()
+    const [query, setQuery] = useState(location.search)
+    const [loading, setLoading] = useState(true)
 
-    let output = ""
+    useEffect(() => { 
+         setLoading(true)
+            return fetchAPI(`articles${query}`).then((data) => {
+                setLoading(false)         
+                setArticles(data.articles)     
+            })
+        }, [topic, ] )
 
-    let setLoading = false
-
-    useEffect(() => {
-         setLoading = true
-         return fetch(`https://nc-news-example-5.herokuapp.com/api/articles?topic=${topic}`).then((data) => {
-         return data.json()})
-         .then((data)=>{
-             setArticles(data.articles)
-         })
-        
-         setLoading = false
-        }, [topic] )
-
-    if (setLoading) return <h1>Loading....</h1>
-
-
+    if (loading) { return <h1>Loading....</h1> }
+    else {
     return (
 
         <div>
@@ -39,6 +37,7 @@ const ArticleList = () => {
             })}
         </ul>   
 </div> )
+    }
 }
 
 export default ArticleList
