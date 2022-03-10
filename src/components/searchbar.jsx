@@ -1,24 +1,36 @@
-import { useState } from "react"
-
+import { useEffect, useState } from "react"
+import { getTopics } from "../api"
 
 const Searchbar = ({setQuery}) => {
 
+    const [loading, setLoading] = useState(true)
     const [topicSelection, setTopicSelection] =useState()
+    const [topics, setTopics] =useState()
 
-    return (
+    useEffect(() => { 
+        setLoading(true)
+           getTopics().then((data) => {
+            setTopics(data) 
+               setLoading(false)     
+               console.log(data)
+           })
+       }, [] )
+    if(loading) { return ( <h2>Loading...</h2> ) }
+
+    else {
+        return (
     <div>
-        {/* <label htmlFor="searchbar">Search (WIP):</label> */}
-       {/* <input id="searchbar" onChange={(e) => setSearch(e.target.value)} type="text"></input> */}
-       {/* // Refactor to use Navigate */}
        <select id="topicselect" onChange={(e) => setQuery(e.target.value)}>
            <option hidden></option>
-            <option value="">Any</option>
-           <option value="?topic=coding">Coding</option>
-           <option value="?topic=cooking">Cooking</option>
-           <option value="?topic=football">Football</option>
+            <option value="">All</option>
+            {topics.map((topic)=> {
+                console.log(topic)
+                return <option> {topic.slug} </option>
+            })}
            </select>
     </div>
-    )
+        )
+    }
 }
 
 export default Searchbar

@@ -1,14 +1,16 @@
+import { Link } from "react-router-dom"
 // This is the item used for displaying articles in the article list.
 
 const ArticleItem = ({object}) => {
-    console.log(object)
     return(
+    <Link to={`/article/${object.article_id}`}>    
     <div className="article-item">
-        <div className="title"><h2>{object.title}</h2>
+        <div className="title">
+            <h2>{object.title}</h2>
         <span className="adjuster"></span></div>
-        
-        <p>{(object.body).slice(0, 128)+" (...) "}</p>
-    </div> )
+
+    </div> </Link>
+    )
 }
 
 export default ArticleItem
