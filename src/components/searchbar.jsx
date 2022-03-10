@@ -25,7 +25,7 @@ const Searchbar = ({setQuery}) => {
             <option value="">All</option>
             {topics.map((topic)=> {
                 console.log(topic)
-                return <option> {topic.slug} </option>
+                return <option key={topic.slug}> {topic.slug} </option>
             })}
            </select>
     </div>
