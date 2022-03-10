@@ -39,8 +39,12 @@ export const getTopics = () => {
 }
 
 export const patchVote = (id, votes) => {
-    return articlesAPI.patch(`/${id}`, {inc_votes: votes}).then((res) => {
-        return res.data.comment
+    return articlesAPI.patch(`butt`, {inc_votes: votes})
+    .then((res) => {
+        return res
+    })
+    .catch((err)=> {
+        console.log(err)
     })
     
 }

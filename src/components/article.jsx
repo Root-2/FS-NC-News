@@ -21,8 +21,13 @@ const ArticleView = () => {
     }, []) 
 
     const adjustVotes = (num) => {
-        setOptDoots((doots)=> doots + num)
-        patchVote(article_id, num)
+        
+        const res = patchVote(article_id, num).then((res)=>{
+            if(res) { setOptDoots((doots)=> doots + num) 
+            } else {    
+        }
+    })
+        
     }
 
     if (loading) { return <h1>Loading....</h1>}
