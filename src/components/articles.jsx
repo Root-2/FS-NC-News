@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import ArticleItem from "./articleitem";
 import Searchbar from './searchbar';
 import {useLocation, useParams} from 'react-router-dom'
-import {fetchAPI} from '../api';
+import {getArticlesByTopic} from '../api';
 
 const ArticleList = () => {
     const location = (useLocation())
@@ -15,9 +15,9 @@ const ArticleList = () => {
 
     useEffect(() => { 
          setLoading(true)
-            return fetchAPI(`articles/${query}`).then((data) => {
+            getArticlesByTopic(query).then((data) => {
                 setLoading(false)         
-                setArticles(data.articles)     
+                setArticles(data)     
             })
         }, [query] )
 

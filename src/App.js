@@ -15,9 +15,8 @@ function App() {
       <h1>NC News App</h1>
         <Routes>
         <Route path="/" element={<ArticleList />} />
-            <Route path="/articles/:topic" element={<ArticleList />} />
             <Route path="/articles" element={<ArticleList />} />
-            <Route path="/article" element={<ArticleView />} />
+            <Route path="/article/:article_id" element={<ArticleView />} />
             <Route path="/comments" element={<CommentView />} />
             <Route path="/profile" element={<Profile />} />
         </Routes>
