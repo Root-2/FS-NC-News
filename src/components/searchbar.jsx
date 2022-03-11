@@ -12,7 +12,6 @@ const Searchbar = ({setQuery}) => {
            getTopics().then((data) => {
             setTopics(data) 
                setLoading(false)     
-               console.log(data)
            })
        }, [] )
     if(loading) { return ( <h2>Loading...</h2> ) }
@@ -24,7 +23,6 @@ const Searchbar = ({setQuery}) => {
            <option hidden></option>
             <option value="">All</option>
             {topics.map((topic)=> {
-                console.log(topic)
                 return <option key={topic.slug}> {topic.slug} </option>
             })}
            </select>
