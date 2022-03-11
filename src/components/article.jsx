@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom"
 import { useState, useEffect } from "react"
 import { getArticleByID, patchVote } from "../api"
 import { Link } from "react-router-dom"
+import CommentView from "./comments"
 
 
 
@@ -43,8 +44,7 @@ const ArticleView = () => {
                 <Link to={`/articles`}>
                 <h2>Return to Article List</h2>    
                 </Link>
-                <Link to={`/articles/${article_id}/comments`}>
-                    <h2>View comments</h2></Link>
+                < CommentView articleID={article_id}/>
             </div>
         )
     }
