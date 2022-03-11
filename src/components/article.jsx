@@ -44,7 +44,7 @@ const ArticleView = () => {
                 <Link to={`/articles`}>
                 <h2>Return to Article List</h2>    
                 </Link>
-                < CommentView object={article_id}/>
+                < CommentView articleID={article_id}/>
             </div>
         )
     }

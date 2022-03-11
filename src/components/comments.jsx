@@ -1,14 +1,13 @@
 import { getCommentsByID } from "../api"
 import { useState, useEffect } from "react"
 
-const CommentView = ({object}) => {
-    // object is article ID
+const CommentView = ({articleID}) => {
     const [loading, setLoading] = useState(true)
     const [comments, setComments] = useState([])
 
     useEffect(()=>{
         setLoading(true)
-        getCommentsByID(object).then(({comments}) => {
+        getCommentsByID(articleID).then(({comments}) => {
             setComments(comments)
             setLoading(false)
     })
